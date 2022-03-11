@@ -15,7 +15,7 @@ AsyncWebServer webServer(HTTP_PORT);
 DNSServer dnsServer;
 
 
-const char html_head[] PROGMEM = "<!DOCTYPE html> <html>"
+const char html_head[] = "<!DOCTYPE html> <html>"
   "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">"
   "<title>Swan Samba LED Control</title>"
   "<style>html { font-family: Helvetica, sans-serif; display: inline-block; margin: 0px auto; text-align: center;}"
@@ -110,7 +110,7 @@ void notFound(AsyncWebServerRequest *request) {
 
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   WiFi.softAP(ssid, password);
   delay(100);
