@@ -426,10 +426,11 @@ void setup() {
 
   webServer.onNotFound(notFound);
     
-  // Setup a captive portal, responding to all DNS requests
+  // Setup a captive portal, responding to all DNS requests with the ESP's IP
+  dnsServer.setErrorReplyCode(DNSReplyCode::NoError);
   dnsServer.start(DNS_PORT, "*", WiFi.softAPIP());
   Serial.println("DNS server started");
-
+ 
   webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER);  //only when requested from AP
 
   webServer.begin();
