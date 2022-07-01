@@ -33,7 +33,6 @@ public:
   virtual ~CaptiveRequestHandler() {}
 
   bool canHandle(AsyncWebServerRequest *request){
-    //request->addInterestingHeader("ANY");
     return true;
   }
 
@@ -43,7 +42,7 @@ public:
     response->printf(html_head);
     response->print("<body>");
     response->print("<h1>Swan Samba LED Control</h1>");
-    response->printf("<p>Open <a href='http://%s'>LED Control</a></p>", WiFi.softAPIP().toString().c_str());
+    response->printf("<p style='color:white'>Open <a href='http://%s' style='color:white'>LED Control</a></p>", WiFi.softAPIP().toString().c_str());
     response->print("</body></html>");
     request->send(response);
   }
@@ -426,10 +425,11 @@ void setup() {
   });
 
   webServer.onNotFound(notFound);
-  
+    
   // Setup a captive portal, responding to all DNS requests
   dnsServer.start(DNS_PORT, "*", WiFi.softAPIP());
   Serial.println("DNS server started");
+
   webServer.addHandler(new CaptiveRequestHandler()).setFilter(ON_AP_FILTER);  //only when requested from AP
 
   webServer.begin();
